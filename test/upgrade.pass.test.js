@@ -47,7 +47,7 @@ describe("Upgrade NFT contract", function() {
     );
 
     // mass upgrading all proxies
-    const NFTforBadgeV2 = await ethers.getContractFactory("NFTforBadgeV2");
+    const NFTforBadgeV2 = await ethers.getContractFactory("NFTforBadgeV2Test");
     await upgrades.upgradeBeacon(BEACON_ADDRESS, NFTforBadgeV2);
     console.log("Beacon upgraded: ", BEACON_ADDRESS)
 
