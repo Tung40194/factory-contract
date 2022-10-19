@@ -19,12 +19,14 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721BurnableUpgradeable.sol";
 
 contract NFTforBadgeV1 is
     Initializable,
     ContextUpgradeable,
     OwnableUpgradeable,
     ERC721EnumerableUpgradeable,
+    ERC721BurnableUpgradeable,
     ReentrancyGuardUpgradeable
 {
     using CountersUpgradeable for CountersUpgradeable.Counter;
@@ -69,6 +71,44 @@ contract NFTforBadgeV1 is
 
     /// @dev This emits when the contract uri is changed.
     event ContractURISet(string _contractURI);
+
+    /**
+     * @dev Hook that is called before consecutive token transfers.
+     * See {ERC721Upgradable::_beforeConsecutiveTokenTransfer}.
+     */
+    function _beforeConsecutiveTokenTransfer(
+        address from,
+        address to,
+        uint256, /*first*/
+        uint96 size
+    ) internal override(ERC721EnumerableUpgradeable, ERC721Upgradeable) {
+        uint256 tokenId; //dummy param
+        super._beforeConsecutiveTokenTransfer(from, to, tokenId, size);
+    }
+
+    /**
+     * @dev Hook that is called before any (single) token transfer. This includes minting and burning.
+     * See {ERC721Upgradable::_beforeTokenTransfer}.
+     */
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal override(ERC721EnumerableUpgradeable, ERC721Upgradeable) {
+        super._beforeTokenTransfer(from, to, tokenId);
+    }
+
+    /**
+     * @dev See {IERC165-supportsInterface}.
+     */
+    function supportsInterface(bytes4 interfaceId) public view virtual
+        override(
+            ERC721EnumerableUpgradeable,
+            ERC721Upgradeable
+        ) returns (bool) {
+        return super.supportsInterface(interfaceId);
+    }
+
 
     /// @dev set the price for each badge
     function setPrice(uint256 _price) external onlyOwner {
@@ -147,6 +187,7 @@ contract NFTforBadgeV1 is
     /// @notice Only claimer can call to claim an NFT
     /// @notice the remaining nativecoin after claiming is refunded to the message sender.
     function claim() external payable nonReentrant {
+        require(msg.value >= price, "CN6");
         require(mintingMode == MintingMode.CLAIMER, "CN7");
         _safeMint(_msgSender(), tokenIdTracker.current());
         tokenIdTracker.increment();

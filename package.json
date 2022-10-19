@@ -18,6 +18,7 @@
     "@openzeppelin/contracts": "^4.7.3",
     "@openzeppelin/contracts-upgradeable": "^4.8.0-rc.1",
     "@openzeppelin/hardhat-upgrades": "^1.21.0",
+    "@openzeppelin/test-helpers": "^0.5.16",
     "@optionality.io/clone-factory": "^0.2.1",
     "dotenv": "^16.0.3",
     "hardhat-contract-sizer": "^2.6.1",
