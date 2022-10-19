@@ -82,8 +82,8 @@ contract NFTforBadgeV1 is
         uint256, /*first*/
         uint96 size
     ) internal override(ERC721EnumerableUpgradeable, ERC721Upgradeable) {
-        uint256 tokenId; //dummy param
-        super._beforeConsecutiveTokenTransfer(from, to, tokenId, size);
+        uint256 first; //dummy param
+        super._beforeConsecutiveTokenTransfer(from, to, first, size);
     }
 
     /**

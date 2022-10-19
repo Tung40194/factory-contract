@@ -130,4 +130,18 @@ describe("Upgrade NFT contract", function() {
     expect((web3.utils.toBN(prev_balance).add(profit)).toString()).to.equal(new_balance);
   });
 
+  it('Successfully burn nfts', async () => {
+    await nft.setBeneficiary(beneficiary);
+    await nft.setMitingMode(MINTING_MODE);
+    await nft.setMinters([accounts[1].address]); // accounts[0] is the default caller
+    await nft.connect(accounts[1]).mint([accounts[7].address, accounts[8].address], { value: web3.utils.toWei("0.00000002", 'ether') });
+    let totalSuplly = await nft.totalSupply();
+    await expect(totalSuplly.toNumber()).to.equal(2);
+    await nft.connect(accounts[7]).burn(0); //account7 has token #0
+    await nft.connect(accounts[8]).burn(1); //account8 has token #1
+
+    totalSuplly = await nft.totalSupply();
+    await expect(totalSuplly.toNumber()).to.equal(0);
+  });
+
 });
