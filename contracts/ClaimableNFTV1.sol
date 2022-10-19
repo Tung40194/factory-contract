@@ -53,7 +53,7 @@ contract NFTforBadgeV1 is
     }
 
     /// @dev minting mode.
-    enum MintingMode{ MINTER, CLAIMER, RESERVED1, RESERVED2, RESERVED3 }
+    enum MintingMode{ MINTER, CLAIMER }
     MintingMode public mintingMode;
     uint256 public price;
     address public beneficiary;
