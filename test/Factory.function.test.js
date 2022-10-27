@@ -1,5 +1,8 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
+const { web3 } = require('@openzeppelin/test-helpers/src/setup');
+
+const REVERT_WITHDRAWER_IS_NOT_THE_OWNER = 'Ownable: caller is not the owner'
 
 describe("Contract factory functional testing", function() {
   it('Mass upgrade successfully', async () => {
@@ -45,7 +48,7 @@ describe("Contract factory functional testing", function() {
 
   });
 
-  it.only('Mass upgrade fail because caller is not the Owner of the beacon', async () => {
+  it('Mass upgrade fail because caller is not the Owner of the beacon', async () => {
 
     const accounts = await ethers.getSigners();
 
@@ -75,7 +78,8 @@ describe("Contract factory functional testing", function() {
     // mass upgrade with 1 transaction to deployedNFTV2
     const beaconAddress = deployedFactory.getBeacon();
     const deployedBeacon = Beacon.attach(beaconAddress);
-    await deployedBeacon.connect(accounts[4]).updateContract(deployedNFTV2.address);
-
+    await expect(
+        deployedBeacon.connect(accounts[4]).updateContract(deployedNFTV2.address),
+      ).revertedWith(REVERT_WITHDRAWER_IS_NOT_THE_OWNER)
   });
 });
