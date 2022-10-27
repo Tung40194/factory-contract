@@ -10,7 +10,7 @@ import "./Beacon.sol";
 
 contract Factory is Initializable, OwnableUpgradeable {
 
-    Beacon beacon;
+    Beacon private beacon;
     mapping(uint256 => address) private proxies;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
@@ -20,7 +20,6 @@ contract Factory is Initializable, OwnableUpgradeable {
 
     function initialize(address implContract) public initializer {
         beacon = new Beacon(implContract);
-        beacon.transferOwnership(_msgSender());
         __Ownable_init();
     }
 
@@ -49,6 +48,10 @@ contract Factory is Initializable, OwnableUpgradeable {
 
      function getProxy(uint256 index) public view returns (address) {
         return proxies[index];
+    }
+
+    function upgradeProxies(address implContract) external onlyOwner {
+        beacon.updateContract(implContract);
     }
 
 
