@@ -1,5 +1,5 @@
 // contracts/ClaimableNFTV1.sol
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
 
 /*
  * Error message map.
@@ -31,14 +31,14 @@ contract NFTforBadgeV1 is
 {
     using CountersUpgradeable for CountersUpgradeable.Counter;
 
-    /// prevent implementation-contract init() from getting called
+    /// prevent implementation-contract initialize() from getting called
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
 
     // function as a constructor's alternative
-    function init(
+    function initialize(
         string memory _name,
         string memory _symbol,
         string memory _contractURI,

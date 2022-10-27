@@ -39,7 +39,7 @@ describe("Upgrade NFT contract", function() {
       BEACON_ADDRESS,
       NFTforBadgeV1,
       ["nameCoin1", "NMC1", "name-coin-uri1", 10000000000],
-      { initializer: 'init' }
+      { initializer: 'initialize' }
     );
     await nft.deployed();
     console.log("NFT deployed to:", nft.address);

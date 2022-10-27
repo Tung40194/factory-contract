@@ -17,7 +17,7 @@ describe("Upgrade NFT contract", function() {
       BEACON_ADDRESS,
       NFTforBadgeV1,
       ["nameCoin1", "NMC1", "name-coin-uri1", 100000000000],
-      { initializer: 'init' }
+      { initializer: 'initialize' }
     );
     await nft1.deployed();
     console.log("NFT deployed to:", nft1.address);
@@ -26,7 +26,7 @@ describe("Upgrade NFT contract", function() {
       BEACON_ADDRESS,
       NFTforBadgeV1,
       ["nameCoin2", "NMC2", "name-coin-uri2", 200000000000],
-      { initializer: 'init' }
+      { initializer: 'initialize' }
     );
     await nft2.deployed();
     console.log("NFT deployed to:", nft2.address);
@@ -35,7 +35,7 @@ describe("Upgrade NFT contract", function() {
       BEACON_ADDRESS,
       NFTforBadgeV1,
       ["nameCoin3", "NMC3", "name-coin-uri3", 300000000000],
-      { initializer: 'init' }
+      { initializer: 'initialize' }
     );
     await nft3.deployed();
     console.log("NFT deployed to:", nft3.address);

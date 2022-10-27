@@ -9,7 +9,7 @@ async function main() {
   console.log("Beacon deployed to:", beacon.address);
 
   // Repeat the following if you'd like to deploy multiple proxy instances
-  const nft = await upgrades.deployBeaconProxy(beacon, NFT, ["nameCoin", "NMC", "name-coin-uri", 100000000000], { initializer: 'init' });
+  const nft = await upgrades.deployBeaconProxy(beacon, NFT, ["nameCoin", "NMC", "name-coin-uri", 100000000000], { initializer: 'initialize' });
   await nft.deployed();
   console.log("NFT deployed to:", nft.address);
 }

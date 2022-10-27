@@ -9,7 +9,7 @@ describe("Contract factory functional testing", function() {
 
     const accounts = await ethers.getSigners();
 
-    const Factory = await ethers.getContractFactory("Factory");
+    const Factory = await ethers.getContractFactory("FactoryV1");
     const Beacon = await ethers.getContractFactory("Beacon");
     const NFTforBadgeV1 = await ethers.getContractFactory("NFTforBadgeV1");
     const NFTforBadgeV2 = await ethers.getContractFactory("NFTforBadgeV2Test");
@@ -50,7 +50,7 @@ describe("Contract factory functional testing", function() {
 
     const accounts = await ethers.getSigners();
 
-    const Factory = await ethers.getContractFactory("Factory");
+    const Factory = await ethers.getContractFactory("FactoryV1");
     const Beacon = await ethers.getContractFactory("Beacon");
     const NFTforBadgeV1 = await ethers.getContractFactory("NFTforBadgeV1");
     const NFTforBadgeV2 = await ethers.getContractFactory("NFTforBadgeV2Test");
@@ -76,11 +76,11 @@ describe("Contract factory functional testing", function() {
 
   });
 
-  it('Mass upgrade fail because caller is not the Owner of the Beacon #1', async () => {
+  it('Mass upgrade fails because caller is not the Owner of the Beacon #1', async () => {
 
     const accounts = await ethers.getSigners();
 
-    const Factory = await ethers.getContractFactory("Factory");
+    const Factory = await ethers.getContractFactory("FactoryV1");
     const Beacon = await ethers.getContractFactory("Beacon");
     const NFTforBadgeV1 = await ethers.getContractFactory("NFTforBadgeV1");
     const NFTforBadgeV2 = await ethers.getContractFactory("NFTforBadgeV2Test");
@@ -108,11 +108,11 @@ describe("Contract factory functional testing", function() {
 
   });
 
-  it('Mass upgrade fail because caller is not the Owner of the Beacon #2', async () => {
+  it('Mass upgrade fails because caller is not the Owner of the Beacon #2', async () => {
 
     const accounts = await ethers.getSigners();
 
-    const Factory = await ethers.getContractFactory("Factory");
+    const Factory = await ethers.getContractFactory("FactoryV1");
     const Beacon = await ethers.getContractFactory("Beacon");
     const NFTforBadgeV1 = await ethers.getContractFactory("NFTforBadgeV1");
     const NFTforBadgeV2 = await ethers.getContractFactory("NFTforBadgeV2Test");

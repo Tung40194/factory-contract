@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts/proxy/beacon/BeaconProxy.sol";
@@ -8,7 +9,8 @@ import "./ClaimableNFTV1.sol";
 import "./ClaimableNFTV2.sol";
 import "./Beacon.sol";
 
-contract Factory is Initializable, OwnableUpgradeable {
+contract FactoryV1 is Initializable, OwnableUpgradeable, UUPSUpgradeable {
+    event ProxyCreated(string name, string symbol, string contractUri, uint256 price, uint256 proxyIndex);
 
     Beacon private beacon;
     mapping(uint256 => address) private proxies;
@@ -24,17 +26,18 @@ contract Factory is Initializable, OwnableUpgradeable {
     }
 
     function createProxy(
-        string memory _name,
-        string memory _symbol,
-        string memory _contractURI,
-        uint256 _price,
+        string memory name,
+        string memory symbol,
+        string memory contractURI,
+        uint256 price,
         uint256 index
     ) external onlyOwner returns (address) {
         BeaconProxy proxy = new BeaconProxy(
             address(beacon), 
-            abi.encodeWithSelector(NFTforBadgeV1.init.selector, _name, _symbol, _contractURI, _price)
+            abi.encodeWithSelector(NFTforBadgeV1.initialize.selector, name, symbol, contractURI, price)
         );
         proxies[index] = address(proxy);
+        emit ProxyCreated(name, symbol, contractURI, price, index);
         return address(proxy);
     }
 
@@ -54,5 +57,6 @@ contract Factory is Initializable, OwnableUpgradeable {
         beacon.updateContract(implContract);
     }
 
+    function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
 }
