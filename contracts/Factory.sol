@@ -20,17 +20,19 @@ contract Factory is Initializable, OwnableUpgradeable {
 
     function initialize(address implContract) public initializer {
         beacon = new Beacon(implContract);
+        beacon.transferOwnership(_msgSender());
         __Ownable_init();
     }
 
-    function create(
+    function createProxy(
         string memory _name,
         string memory _symbol,
         string memory _contractURI,
         uint256 _price,
         uint256 index
     ) external onlyOwner returns (address) {
-        BeaconProxy proxy = new BeaconProxy(address(beacon), 
+        BeaconProxy proxy = new BeaconProxy(
+            address(beacon), 
             abi.encodeWithSelector(NFTforBadgeV1.init.selector, _name, _symbol, _contractURI, _price)
         );
         proxies[index] = address(proxy);
@@ -38,14 +40,14 @@ contract Factory is Initializable, OwnableUpgradeable {
     }
 
     function getImplementation() public view returns (address) {
-        return beacon.getImplementation();
+        return beacon.implementation();
     }
 
      function getBeacon() public view returns (address) {
         return address(beacon);
     }
 
-     function getVault(uint256 index) public view returns (address) {
+     function getProxy(uint256 index) public view returns (address) {
         return proxies[index];
     }
 

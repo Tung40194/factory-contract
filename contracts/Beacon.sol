@@ -2,8 +2,9 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/proxy/beacon/UpgradeableBeacon.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Beacon {
+contract Beacon is Ownable {
 
     UpgradeableBeacon immutable beacon;
     address public implementationContract;
@@ -13,12 +14,12 @@ contract Beacon {
         implementationContract = impl;
     }
 
-    function updateContract(address impl) public {
+    function updateContract(address impl) public onlyOwner {
         beacon.upgradeTo(impl);
         implementationContract = impl;
     }
 
-    function getImplementation() public view returns(address) {
+    function implementation() public view returns(address) {
         return beacon.implementation();
     }
 
