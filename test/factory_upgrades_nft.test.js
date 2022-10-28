@@ -24,9 +24,9 @@ describe("Contract factory functional testing", function() {
     console.log("Factory deployed at: ", deployedFactory.address);
 
     // create multiple proxies
-    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000, 1);
-    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000, 2);
-    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000, 3);
+    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     const proxy1Address = await deployedFactory.getProxy(1);
     const proxy2Address = await deployedFactory.getProxy(2);
@@ -65,9 +65,9 @@ describe("Contract factory functional testing", function() {
     console.log("Factory deployed at: ", deployedFactory.address);
 
     // create multiple proxies
-    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000, 1);
-    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000, 2);
-    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000, 3);
+    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     // mass upgrade with 1 transaction to deployedNFTV2
     await expect(
@@ -95,9 +95,9 @@ describe("Contract factory functional testing", function() {
     console.log("Factory deployed at: ", deployedFactory.address);
 
     // create multiple proxies
-    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000, 1);
-    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000, 2);
-    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000, 3);
+    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     // mass upgrade with 1 transaction to deployedNFTV2
     const beaconAddress = deployedFactory.getBeacon();
@@ -127,9 +127,9 @@ describe("Contract factory functional testing", function() {
     console.log("Factory deployed at: ", deployedFactory.address);
 
     // create multiple proxies
-    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000, 1);
-    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000, 2);
-    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000, 3);
+    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     // mass upgrade with 1 transaction to deployedNFTV2
     const beaconAddress = deployedFactory.getBeacon();

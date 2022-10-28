@@ -7,7 +7,6 @@ describe("Test the upgradability of Factory", function() {
 
     const accounts = await ethers.getSigners();
 
-    const Factory = await ethers.getContractFactory("FactoryV1");
     const NFTforBadgeV1 = await ethers.getContractFactory("NFTforBadgeV1");
 
     // deploy implementation NFTforBadgeV1 and NFTforBadgeV2
@@ -18,9 +17,10 @@ describe("Test the upgradability of Factory", function() {
     const FactoryV2 = await ethers.getContractFactory('FactoryV2Test');
 
     // Deploy Factory contract
-    const factory = await upgrades.deployProxy(FactoryV1, [deployedNFTV1.address], {initializer: 'initialize', kind: 'uups'});
+    const factory = await upgrades.deployProxy(FactoryV1, [deployedNFTV1.address], {initializer: 'initialize'});
     console.log('Factory deployed to (proxy address):', factory.address);
     console.log('Factory implementation address:', await upgrades.erc1967.getImplementationAddress(factory.address));
+    console.log('admin address:', await upgrades.erc1967.getAdminAddress(factory.address));
 
     // must cause error
     try {
@@ -31,7 +31,7 @@ describe("Test the upgradability of Factory", function() {
     }
     
     // upgrade factory contract
-    const upgraded = await upgrades.upgradeProxy(factory, FactoryV2, {kind: 'uups'});
+    const upgraded = await upgrades.upgradeProxy(factory, FactoryV2);
 
     // verify upgrade status with new function that only exists in factory V2
     const factory_new = await FactoryV2.attach(factory.address);
