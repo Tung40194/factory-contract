@@ -11,14 +11,14 @@ module.exports = {
   // defaultNetwork: "mumbai",
   networks: {
     hardhat: {},
-    // mumbai: {
-    //   url: "https://matic-mumbai.chainstacklabs.com",
-    //   accounts: [process.env.PRIVATE_KEY]
-    // },
-    // matic: {
-    //   url: "https://polygon-rpc.com/",
-    //   accounts: [process.env.PRIVATE_KEY]
-    // }
+    mumbai: {
+      url: "https://matic-mumbai.chainstacklabs.com",
+      accounts: [process.env.PRIVATE_KEY]
+    },
+    matic: {
+      url: "https://polygon-rpc.com/",
+      accounts: [process.env.PRIVATE_KEY]
+    }
   },
   etherscan: {
     apiKey: process.env.POLYGONSCAN_API_KEY,

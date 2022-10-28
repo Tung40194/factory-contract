@@ -68,7 +68,7 @@ describe("Upgrade NFT contract", function() {
 
   it('Can not mint when not in minting mode', async () => {
     await nft.setBeneficiary(beneficiary);
-    await nft.setMitingMode(CLAIMING_MODE);
+    await nft.setMintingMode(CLAIMING_MODE);
     await nft.setMinters([accounts[0].address]); // accounts[0] is the default caller
     await expect(
       nft.mint([accounts[6].address]),
@@ -77,7 +77,7 @@ describe("Upgrade NFT contract", function() {
 
   it('Can not mint when not in claiming mode', async () => {
     await nft.setBeneficiary(beneficiary);
-    await nft.setMitingMode(MINTING_MODE);
+    await nft.setMintingMode(MINTING_MODE);
     await nft.setMinters([accounts[0].address]); // accounts[0] is the default caller
     await expect(
       nft.claim({ value: web3.utils.toWei("2", 'ether') }),
@@ -86,7 +86,7 @@ describe("Upgrade NFT contract", function() {
 
   it('Can not claim when funds are insufficient', async () => {
     await nft.setBeneficiary(beneficiary);
-    await nft.setMitingMode(MINTING_MODE);
+    await nft.setMintingMode(MINTING_MODE);
     await nft.setMinters([accounts[0].address]); // accounts[0] is the default caller
     await expect(
       nft.claim(),
@@ -95,20 +95,20 @@ describe("Upgrade NFT contract", function() {
 
   it('Successfully claim when funds are sufficient', async () => {
     await nft.setBeneficiary(beneficiary);
-    await nft.setMitingMode(CLAIMING_MODE);
+    await nft.setMintingMode(CLAIMING_MODE);
     await nft.claim({ from: accounts[0].address, value: web3.utils.toWei("1", 'ether') });
   });
 
   it('Successfully mint when funds are sufficient', async () => {
     await nft.setBeneficiary(beneficiary);
-    await nft.setMitingMode(MINTING_MODE);
+    await nft.setMintingMode(MINTING_MODE);
     await nft.setMinters([accounts[1].address]); // accounts[0] is the default caller
     await nft.connect(accounts[1]).mint([accounts[7].address, accounts[8].address], { value: web3.utils.toWei("0.00000002", 'ether') });
   });
 
   it('Can not withdraw funds when caller is not the owner', async () => {
     await nft.setBeneficiary(beneficiary);
-    await nft.setMitingMode(MINTING_MODE);
+    await nft.setMintingMode(MINTING_MODE);
     await nft.setMinters([accounts[1].address]); // accounts[0] is the default caller
     await nft.connect(accounts[1]).mint([accounts[7].address, accounts[8].address], { value: web3.utils.toWei("0.00000002", 'ether') });
     await expect(
@@ -119,7 +119,7 @@ describe("Upgrade NFT contract", function() {
   it('Successfully withdraw funds', async () => {
     const prev_balance = await ethers.provider.getBalance(beneficiary);
     await nft.setBeneficiary(beneficiary);
-    await nft.setMitingMode(MINTING_MODE);
+    await nft.setMintingMode(MINTING_MODE);
     await nft.setMinters([accounts[1].address]); // accounts[0] is the default caller
     await nft.connect(accounts[1]).mint([accounts[7].address, accounts[8].address], { value: web3.utils.toWei("0.00000002", 'ether') });
     await nft.withdraw();
@@ -132,7 +132,7 @@ describe("Upgrade NFT contract", function() {
 
   it('Successfully burn nfts', async () => {
     await nft.setBeneficiary(beneficiary);
-    await nft.setMitingMode(MINTING_MODE);
+    await nft.setMintingMode(MINTING_MODE);
     await nft.setMinters([accounts[1].address]); // accounts[0] is the default caller
     await nft.connect(accounts[1]).mint([accounts[7].address, accounts[8].address], { value: web3.utils.toWei("0.00000002", 'ether') });
     let totalSuplly = await nft.totalSupply();

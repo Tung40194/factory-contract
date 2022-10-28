@@ -10,6 +10,7 @@ import "./ClaimableNFTV2.sol";
 import "./Beacon.sol";
 
 contract FactoryV1 is Initializable, OwnableUpgradeable, UUPSUpgradeable {
+    
     event ProxyCreated(string name, string symbol, string contractUri, uint256 price, uint256 proxyIndex);
 
     Beacon private beacon;

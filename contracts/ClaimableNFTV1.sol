@@ -152,7 +152,7 @@ contract NFTforBadgeV1 is
      * 0: style default, only minters mint via mint()
      * 1: for claimers and only claimers mint via claim()
      */
-    function setMitingMode(MintingMode _mode) external onlyOwner {
+    function setMintingMode(MintingMode _mode) external onlyOwner {
         mintingMode = _mode;
     }
 
