@@ -8,14 +8,26 @@ A simple NFT for Cryptobadge reboot. This project applies beacon proxy Factory u
     - npm install
     - npx hardhat test
 
-# I. Factory contract specification
+# I. Factory contract interface
+
+    /// @notice fire when a new proxy is created
+    event ProxyCreated(
+        address proxyAddress,
+        string name,
+        string symbol,
+        string contractUri,
+        uint256 price,
+        uint256 proxyIndex
+    );
 
     /// @notice Create nft proxy contract
+    /// @param owner: the address that will be the owner of this contract
     /// @param name: nft contract name
     /// @param symbol: nft contract symbol
     /// @param contractURI: nft contract contractURI
     /// @param price: nft base fee per each NFT
     function createProxy(
+        address owner,
         string memory name,
         string memory symbol,
         string memory contractURI,
@@ -56,7 +68,7 @@ Use Factory contract, function `upgradeProxies(address impl_contract)` to upgrad
 
 # IV. Note:
 
-- Network options:
+- Network options(check hardhat.config.js):
     - mumbai
     - polygon
 

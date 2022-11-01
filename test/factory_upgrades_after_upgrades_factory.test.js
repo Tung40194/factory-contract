@@ -25,9 +25,9 @@ describe("Test if Factory still works after upgrading to new Factory", function(
     console.log("Factory deployed at: ", deployedFactoryV1.address);
 
     // create multiple proxies
-    await deployedFactoryV1.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
-    await deployedFactoryV1.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
-    await deployedFactoryV1.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
+    await deployedFactoryV1.createProxy(accounts[2].address, "non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactoryV1.createProxy(accounts[3].address, "non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactoryV1.createProxy(accounts[4].address, "non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     const proxy1Address = await deployedFactoryV1.getProxy(1);
     const proxy2Address = await deployedFactoryV1.getProxy(2);
@@ -44,7 +44,7 @@ describe("Test if Factory still works after upgrading to new Factory", function(
 
 
     // use factory v2 to create a new nft proxy
-    await factoryV2.createProxy("non-fungible token 4", "nft4", "url-nft4", 4000000000); // proxy id 4
+    await factoryV2.createProxy(accounts[5].address, "non-fungible token 4", "nft4", "url-nft4", 4000000000); // proxy id 4
     const proxy4Address = await factoryV2.getProxy(4);
 
     const nft1_new = await NFTforBadgeV2.attach(proxy1Address);

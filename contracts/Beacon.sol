@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Beacon is Ownable {
 
-    event BeaconUpgradedTo(address newImpl);
+    event BeaconUpgradedTo(address oldImpl, address newImpl);
 
     UpgradeableBeacon immutable beacon;
     address public implementationContract;
@@ -18,8 +18,8 @@ contract Beacon is Ownable {
 
     function updateContract(address impl) public onlyOwner {
         beacon.upgradeTo(impl);
+        emit BeaconUpgradedTo(implementationContract, impl);
         implementationContract = impl;
-        emit BeaconUpgradedTo(impl);
     }
 
     function implementation() public view returns(address) {

@@ -11,7 +11,13 @@ import "./Beacon.sol";
 
 contract FactoryV2Test is Initializable, OwnableUpgradeable {
 
-    event ProxyCreated(string name, string symbol, string contractUri, uint256 price, uint256 proxyIndex);
+    event ProxyCreated(
+        string name,
+        string symbol,
+        string contractUri,
+        uint256 price,
+        uint256 proxyIndex
+    );
 
     using CountersUpgradeable for CountersUpgradeable.Counter;
 
@@ -31,11 +37,13 @@ contract FactoryV2Test is Initializable, OwnableUpgradeable {
     }
 
     /// @notice Create nft proxy contract
+    /// @param owner: the address that will be the owner of this contract
     /// @param name: nft contract name
     /// @param symbol: nft contract symbol
     /// @param contractURI: nft contract contractURI
     /// @param price: nft base fee per each NFT
     function createProxy(
+        address owner,
         string memory name,
         string memory symbol,
         string memory contractURI,
@@ -43,7 +51,14 @@ contract FactoryV2Test is Initializable, OwnableUpgradeable {
     ) external onlyOwner returns (address) {
         BeaconProxy proxy = new BeaconProxy(
             address(beacon), 
-            abi.encodeWithSelector(NFTforBadgeV1.initialize.selector, name, symbol, contractURI, price)
+            abi.encodeWithSelector(
+                NFTforBadgeV1.initialize.selector,
+                owner,
+                name,
+                symbol,
+                contractURI,
+                price
+            )
         );
         proxyIdCounter.increment();
         uint256 index = proxyIdCounter.current();

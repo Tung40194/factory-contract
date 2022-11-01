@@ -16,7 +16,7 @@ describe("Upgrade NFT contract", function() {
     const nft1 = await upgrades.deployBeaconProxy(
       BEACON_ADDRESS,
       NFTforBadgeV1,
-      ["nameCoin1", "NMC1", "name-coin-uri1", 100000000000],
+      [accounts[2].address, "nameCoin1", "NMC1", "name-coin-uri1", 100000000000],
       { initializer: 'initialize' }
     );
     await nft1.deployed();
@@ -25,7 +25,7 @@ describe("Upgrade NFT contract", function() {
     const nft2 = await upgrades.deployBeaconProxy(
       BEACON_ADDRESS,
       NFTforBadgeV1,
-      ["nameCoin2", "NMC2", "name-coin-uri2", 200000000000],
+      [accounts[3].address, "nameCoin2", "NMC2", "name-coin-uri2", 200000000000],
       { initializer: 'initialize' }
     );
     await nft2.deployed();
@@ -34,7 +34,7 @@ describe("Upgrade NFT contract", function() {
     const nft3 = await upgrades.deployBeaconProxy(
       BEACON_ADDRESS,
       NFTforBadgeV1,
-      ["nameCoin3", "NMC3", "name-coin-uri3", 300000000000],
+      [accounts[4].address, "nameCoin3", "NMC3", "name-coin-uri3", 300000000000],
       { initializer: 'initialize' }
     );
     await nft3.deployed();

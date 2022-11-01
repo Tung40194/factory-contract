@@ -39,12 +39,15 @@ contract NFTforBadgeV1 is
 
     // function as a constructor's alternative
     function initialize(
+        address _owner,
         string memory _name,
         string memory _symbol,
         string memory _contractURI,
         uint256 _price
     ) public initializer {
         __Ownable_init();
+        // Factory's transfering proxy ownership
+        transferOwnership(_owner);
         __ERC721_init(_name, _symbol);
         contractURI = _contractURI;
         price = _price;

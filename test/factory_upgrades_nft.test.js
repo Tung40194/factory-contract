@@ -17,16 +17,16 @@ describe("Contract factory functional testing", function() {
     // deploy implementation NFTforBadgeV1 and NFTforBadgeV2
     const deployedNFTV1 = await NFTforBadgeV1.deploy();
     const deployedNFTV2 = await NFTforBadgeV2.deploy();
-    console.log("implementation V1 deployed at: ", deployedNFTV1.address);
+    console.log("NFT implementation V1 deployed at: ", deployedNFTV1.address);
 
     // deploy Factory with initial implementation contract NFTforBadgeV1
     const deployedFactory = await upgrades.deployProxy(Factory, [deployedNFTV1.address], { initializer: 'initialize' });
     console.log("Factory deployed at: ", deployedFactory.address);
 
     // create multiple proxies
-    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
-    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
-    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
+    await deployedFactory.createProxy(accounts[2].address, "non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy(accounts[3].address, "non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy(accounts[4].address, "non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     const proxy1Address = await deployedFactory.getProxy(1);
     const proxy2Address = await deployedFactory.getProxy(2);
@@ -58,16 +58,16 @@ describe("Contract factory functional testing", function() {
     // deploy implementation NFTforBadgeV1 and NFTforBadgeV2
     const deployedNFTV1 = await NFTforBadgeV1.deploy();
     const deployedNFTV2 = await NFTforBadgeV2.deploy();
-    console.log("implementation V1 deployed at: ", deployedNFTV1.address);
+    console.log("NFT implementation V1 deployed at: ", deployedNFTV1.address);
 
     // deploy Factory with initial implementation contract NFTforBadgeV1
     const deployedFactory = await upgrades.deployProxy(Factory, [deployedNFTV1.address], { initializer: 'initialize' });
     console.log("Factory deployed at: ", deployedFactory.address);
 
     // create multiple proxies
-    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
-    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
-    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
+    await deployedFactory.createProxy(accounts[2].address, "non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy(accounts[3].address, "non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy(accounts[4].address, "non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     // mass upgrade with 1 transaction to deployedNFTV2
     await expect(
@@ -88,16 +88,16 @@ describe("Contract factory functional testing", function() {
     // deploy implementation NFTforBadgeV1 and NFTforBadgeV2
     const deployedNFTV1 = await NFTforBadgeV1.deploy();
     const deployedNFTV2 = await NFTforBadgeV2.deploy();
-    console.log("implementation V1 deployed at: ", deployedNFTV1.address);
+    console.log("NFT implementation V1 deployed at: ", deployedNFTV1.address);
 
     // deploy Factory with initial implementation contract NFTforBadgeV1
     const deployedFactory = await upgrades.deployProxy(Factory, [deployedNFTV1.address], { initializer: 'initialize' });
     console.log("Factory deployed at: ", deployedFactory.address);
 
     // create multiple proxies
-    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
-    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
-    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
+    await deployedFactory.createProxy(accounts[2].address, "non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy(accounts[3].address, "non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy(accounts[4].address, "non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     // mass upgrade with 1 transaction to deployedNFTV2
     const beaconAddress = deployedFactory.getBeacon();
@@ -120,16 +120,16 @@ describe("Contract factory functional testing", function() {
     // deploy implementation NFTforBadgeV1 and NFTforBadgeV2
     const deployedNFTV1 = await NFTforBadgeV1.deploy();
     const deployedNFTV2 = await NFTforBadgeV2.deploy();
-    console.log("implementation V1 deployed at: ", deployedNFTV1.address);
+    console.log("NFT implementation V1 deployed at: ", deployedNFTV1.address);
 
     // deploy Factory with initial implementation contract NFTforBadgeV1
     const deployedFactory = await upgrades.deployProxy(Factory, [deployedNFTV1.address], { initializer: 'initialize' });
     console.log("Factory deployed at: ", deployedFactory.address);
 
     // create multiple proxies
-    await deployedFactory.createProxy("non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
-    await deployedFactory.createProxy("non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
-    await deployedFactory.createProxy("non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
+    await deployedFactory.createProxy(accounts[2].address, "non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy(accounts[3].address, "non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy(accounts[4].address, "non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
 
     // mass upgrade with 1 transaction to deployedNFTV2
     const beaconAddress = deployedFactory.getBeacon();
@@ -137,5 +137,42 @@ describe("Contract factory functional testing", function() {
     await expect(
         deployedBeacon.connect(accounts[4]).updateContract(deployedNFTV2.address),
       ).revertedWith(REVERT_NOT_THE_OWNER);
+  });
+
+  it('Verify owner of proxies', async () => {
+
+    const accounts = await ethers.getSigners();
+
+    const Factory = await ethers.getContractFactory("FactoryV1");
+    const NFTforBadgeV1 = await ethers.getContractFactory("NFTforBadgeV1");
+    const NFTforBadgeV2 = await ethers.getContractFactory("NFTforBadgeV2Test");
+
+    // deploy implementation NFTforBadgeV1 and NFTforBadgeV2
+    const deployedNFTV1 = await NFTforBadgeV1.deploy();
+    const deployedNFTV2 = await NFTforBadgeV2.deploy();
+    console.log("NFT implementation V1 deployed at: ", deployedNFTV1.address);
+
+    // deploy Factory with initial implementation contract NFTforBadgeV1
+    const deployedFactory = await upgrades.deployProxy(Factory, [deployedNFTV1.address], { initializer: 'initialize' });
+    console.log("Factory deployed at (proxy address): ", deployedFactory.address);
+
+    // create multiple proxies
+    await deployedFactory.createProxy(accounts[2].address, "non-fungible token 1", "nft1", "url-nft1", 1000000000); // proxy id 1
+    await deployedFactory.createProxy(accounts[3].address, "non-fungible token 2", "nft2", "url-nft2", 2000000000); // proxy id 2
+    await deployedFactory.createProxy(accounts[4].address, "non-fungible token 3", "nft3", "url-nft3", 3000000000); // proxy id 3
+
+    const proxy1Address = await deployedFactory.getProxy(1);
+    const proxy2Address = await deployedFactory.getProxy(2);
+    const proxy3Address = await deployedFactory.getProxy(3);
+    
+    const nft1 = await NFTforBadgeV1.attach(proxy1Address);
+    const nft2 = await NFTforBadgeV1.attach(proxy2Address);
+    const nft3 = await NFTforBadgeV1.attach(proxy3Address);
+
+    // owners of the proxies should be the ones parameterized in proxy creations
+    expect(await nft1.owner()).to.equal(accounts[2].address);
+    expect(await nft2.owner()).to.equal(accounts[3].address);
+    expect(await nft3.owner()).to.equal(accounts[4].address);
+
   });
 });
