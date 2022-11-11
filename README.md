@@ -1,6 +1,4 @@
-A simple NFT for Cryptobadge reboot. This project applies beacon proxy Factory upgradable pattern for upgrading NFT contracts while the Factory itself is upgraded following Transparent upgradable pattern. For more details refer to [The upgradable pattern diagram for Cryptobadge reboot](https://git.baikal.io/can/can-blockchain/-/issues/157).
-
-![alt text](https://git.baikal.io/can/can-blockchain/uploads/d5aff88b9846d7ddba78c189d6546bd9/Screenshot_2022-10-31_at_10.27.40.png)
+This NFT project applies beacon proxy Factory upgradable pattern for upgrading NFT contracts while the Factory itself is upgraded following Transparent upgradable pattern.
 
 ### Prerequisites:
 
