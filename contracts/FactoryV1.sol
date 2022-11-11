@@ -49,7 +49,7 @@ contract FactoryV1 is Initializable, OwnableUpgradeable {
         string memory symbol,
         string memory contractURI,
         uint256 price
-    ) external onlyOwner returns (address) {
+    ) external onlyOwner {
         BeaconProxy proxy = new BeaconProxy(
             address(beacon), 
             abi.encodeWithSelector(
@@ -72,7 +72,6 @@ contract FactoryV1 is Initializable, OwnableUpgradeable {
             price,
             index
         );
-        return address(proxy);
     }
 
     /// @notice get the current implementation contract address

@@ -1,4 +1,4 @@
-A simple NFT for Cryptobadge reboot. This project applies beacon proxy Factory upgradable pattern for upgrading NFT contract while the Factory itself is upgraded following Transparent upgradable pattern. For more details refer to [The upgradable pattern diagram for Cryptobadge reboot](https://git.baikal.io/can/can-blockchain/-/issues/157).
+A simple NFT for Cryptobadge reboot. This project applies beacon proxy Factory upgradable pattern for upgrading NFT contracts while the Factory itself is upgraded following Transparent upgradable pattern. For more details refer to [The upgradable pattern diagram for Cryptobadge reboot](https://git.baikal.io/can/can-blockchain/-/issues/157).
 
 ![alt text](https://git.baikal.io/can/can-blockchain/uploads/d5aff88b9846d7ddba78c189d6546bd9/Screenshot_2022-10-31_at_10.27.40.png)
 
@@ -51,14 +51,17 @@ A simple NFT for Cryptobadge reboot. This project applies beacon proxy Factory u
 # II. Deploy and upgrade NFT contract
 ### 1. Deploy an NFT proxy contract
 Use Factory contract, function `createProxy(...)` to upgrade nft contracts
-### 2. Upgrading NFT contract
-Use Factory contract, function `upgradeProxies(address impl_contract)` to upgrade nft contracts
+
+### 2. Deploy an NFT contract individually
+We might use truffle, hardhat or remix to deploy our new logic/implementation contract. Be sure to follow [contract upgrade rules](https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable#modifying-your-contracts) in writing a new implementation contract strictly or new upgrade will bring bugs and unexpected issues.
+### 3. Upgrading all NFT proxy contracts
+Use Factory contract, function `upgradeProxies(address impl_contract)` and give it new implementation/logic contract address in step2 to upgrade all nft proxy contracts
 
 # III. Deploy and upgrade Factory contract
 ### 1. Deploy Factory contract
 - `npx hardhat run --network localhost scripts/deploy_factory.js`
 
-### 2. Mind transfer upgradership to a Gnosis wallet for better security?
+### 2. Mind transfering upgradership to a Gnosis wallet for better security?
 - `npx hardhat run --network localhost scripts/transfer_upgrade_ownership_factory.js`
 ### 2. Prepare to upgrade Factory contract
 - `npx hardhat run --network localhost scripts/prepare_upgrade_factory.js`
